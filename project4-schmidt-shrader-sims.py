@@ -37,10 +37,10 @@ def time_series():
     data = dat[dat['Date'].dt.year == yr]
     data.set_index('Date')
     col = pickcol(data)
-    data[col].rolling(14).mean().plot()
-    data[col].rolling(14).max().plot()
-    data[col].rolling(14).min().plot()
-    data[col].plot()
+    data[col].rolling(14).mean().plot(label='mean prices')
+    data[col].rolling(14).max().plot(label='max prices')
+    data[col].rolling(14).min().plot(label='min prices')
+    data[col].plot(label='daily')
     m = ["Jan ", "Feb ", "Mar ", "Apr ", "May ", "Jun ", "Jul ", "Aug ", "Sep ", "Oct ", "Nov ", "Dec "]
     upper = f(yr + 1)
     lower = f(yr)
@@ -52,6 +52,7 @@ def time_series():
     plt.ylabel(col + " Price")
     plt.title(col + " Prices for " + file.split("\\")[-1].split(".")[0].split("/")[-1] + " in " + str(yr))
     plt.tight_layout()
+    plt.legend()
     plt.show()
 
 
